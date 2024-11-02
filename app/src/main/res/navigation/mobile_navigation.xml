@@ -22,4 +22,11 @@
         android:name="com.example.calmflightcompanion.ui.slideshow.SlideshowFragment"
         android:label="@string/menu_slideshow"
         tools:layout="@layout/fragment_slideshow" />
+
+    <fragment
+        android:id="@+id/nav_relaxation"
+        android:name="com.example.calmflightcompanion.ui.relaxation.RelaxationFragment"
+        android:label="Relaxation"
+        tools:layout="@layout/fragment_relaxation" />
+
 </navigation>
