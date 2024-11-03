@@ -4,35 +4,54 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.calmflightcompanion.database.DatabaseHelper
 import com.example.calmflightcompanion.databinding.FragmentQuestionsBinding
 
 class QuestionsFragment : Fragment() {
 
     private var _binding: FragmentQuestionsBinding? = null
-
-    // This property is only valid between onCreateView and
-    // onDestroyView.
     private val binding get() = _binding!!
+    private lateinit var dbHelper: DatabaseHelper
+    private lateinit var questionsAdapter: QuestionsAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val slideshowViewModel =
-            ViewModelProvider(this).get(QuestionsViewModel::class.java)
-
         _binding = FragmentQuestionsBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textQuestions
-        slideshowViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
+        dbHelper = DatabaseHelper(requireContext())
+
+        // Load questions from the database
+        val questionsList = loadQuestionsFromDatabase()
+
+        // Set up RecyclerView
+        questionsAdapter = QuestionsAdapter(questionsList)
+        binding.questionsRecyclerView.apply {
+            layoutManager = LinearLayoutManager(context)
+            adapter = questionsAdapter
         }
+
         return root
+    }
+
+    private fun loadQuestionsFromDatabase(): List<Question> {
+        val questions = mutableListOf<Question>()
+        val cursor = dbHelper.getAllFrequentQuestions()
+        if (cursor.moveToFirst()) {
+            do {
+                val id = cursor.getInt(cursor.getColumnIndexOrThrow(DatabaseHelper.COLUMN_FREQUENT_ID))
+                val questionText = cursor.getString(cursor.getColumnIndexOrThrow(DatabaseHelper.COLUMN_FREQUENT_QUESTION))
+                val answerText = cursor.getString(cursor.getColumnIndexOrThrow(DatabaseHelper.COLUMN_FREQUENT_ANSWER))
+                questions.add(Question(id, questionText, answerText))
+            } while (cursor.moveToNext())
+        }
+        cursor.close()
+        return questions
     }
 
     override fun onDestroyView() {
