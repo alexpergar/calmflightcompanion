@@ -1,6 +1,8 @@
 package com.example.calmflightcompanion.ui.questions
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,6 +17,7 @@ class QuestionsFragment : Fragment() {
     private val binding get() = _binding!!
     private lateinit var dbHelper: DatabaseHelper
     private lateinit var questionsAdapter: QuestionsAdapter
+    private var fullQuestionsList: List<Question> = listOf()  // Holds the full list of questions
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -27,14 +30,25 @@ class QuestionsFragment : Fragment() {
         dbHelper = DatabaseHelper(requireContext())
 
         // Load questions from the database
-        val questionsList = loadQuestionsFromDatabase()
+        fullQuestionsList = loadQuestionsFromDatabase()
 
         // Set up RecyclerView
-        questionsAdapter = QuestionsAdapter(questionsList)
+        questionsAdapter = QuestionsAdapter(fullQuestionsList)
         binding.questionsRecyclerView.apply {
             layoutManager = LinearLayoutManager(context)
             adapter = questionsAdapter
         }
+
+        // Set up search field listener
+        binding.searchField.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                filterQuestions(s.toString())
+            }
+
+            override fun afterTextChanged(s: Editable?) {}
+        })
 
         return root
     }
@@ -52,6 +66,20 @@ class QuestionsFragment : Fragment() {
         }
         cursor.close()
         return questions
+    }
+
+    private fun filterQuestions(query: String) {
+        // Filter the list based on the query
+        val filteredList = if (query.isEmpty()) {
+            fullQuestionsList
+        } else {
+            fullQuestionsList.filter {
+                it.question.contains(query, ignoreCase = true)
+            }
+        }
+
+        // Update the adapter with the filtered list
+        questionsAdapter.updateList(filteredList)
     }
 
     override fun onDestroyView() {

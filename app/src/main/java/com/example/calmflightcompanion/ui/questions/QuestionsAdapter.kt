@@ -7,7 +7,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.calmflightcompanion.R
 
-class QuestionsAdapter(private val questionsList: List<Question>) :
+class QuestionsAdapter(private var questionsList: List<Question>) :
     RecyclerView.Adapter<QuestionsAdapter.QuestionViewHolder>() {
 
     inner class QuestionViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -37,4 +37,10 @@ class QuestionsAdapter(private val questionsList: List<Question>) :
     }
 
     override fun getItemCount(): Int = questionsList.size
+
+    // Function to update the list and notify changes
+    fun updateList(newList: List<Question>) {
+        questionsList = newList
+        notifyDataSetChanged()
+    }
 }
