@@ -13,9 +13,9 @@
 
     <fragment
         android:id="@+id/nav_diary"
-        android:name="com.example.calmflightcompanion.ui.diary.DiaryFragment"
+        android:name="com.example.calmflightcompanion.ui.diary.FlightDiaryFragment"
         android:label="@string/menu_diary"
-        tools:layout="@layout/fragment_diary" />
+        tools:layout="@layout/fragment_flight_diary" />
 
     <fragment
         android:id="@+id/nav_questions"
@@ -28,5 +28,20 @@
         android:name="com.example.calmflightcompanion.ui.relaxation.RelaxationFragment"
         android:label="Relaxation"
         tools:layout="@layout/fragment_relaxation" />
+
+    <fragment
+        android:id="@+id/flightDiaryFragment"
+        android:name="com.example.calmflightcompanion.ui.diary.FlightDiaryFragment"
+        android:label="Flight Diary" >
+        <action
+            android:id="@+id/action_flightDiaryFragment_to_editEntryFragment"
+            app:destination="@id/editEntryFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/editEntryFragment"
+        android:name="com.example.calmflightcompanion.ui.diary.EditEntryFragment"
+        android:label="Edit Entry" />
+
 
 </navigation>

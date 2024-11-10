@@ -1,8 +1,6 @@
 package com.example.calmflightcompanion
 
-import android.database.Cursor
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import com.google.android.material.navigation.NavigationView
 import androidx.navigation.findNavController
@@ -46,8 +44,8 @@ class MainActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 
-        dbHelper.deleteAll()
-        dbHelper.testDatabase()
+//        dbHelper.deleteAll()
+//        dbHelper.testDatabase()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

@@ -67,8 +67,8 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         onCreate(db)
     }
 
-    // FrequentQuestions CRUD operations
-    // Insert a new question-answer pair into FrequentQuestions
+    // FrequentQuestions CRUD operations.
+    // Insert a new question-answer pair into FrequentQuestions.
     fun insertFrequentQuestion(question: String, answer: String): Long {
         val db = this.writableDatabase
         val values = ContentValues().apply {
@@ -78,13 +78,13 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         return db.insert(TABLE_FREQUENT, null, values)
     }
 
-    // Get all questions from FrequentQuestions
+    // Get all questions from FrequentQuestions.
     fun getAllFrequentQuestions(): Cursor {
         val db = this.readableDatabase
         return db.query(TABLE_FREQUENT, null, null, null, null, null, "$COLUMN_FREQUENT_ID ASC")
     }
 
-    // Update a question-answer pair in FrequentQuestions
+    // Update a question-answer pair in FrequentQuestions.
     fun updateFrequentQuestion(id: Long, question: String, answer: String): Int {
         val db = this.writableDatabase
         val values = ContentValues().apply {
@@ -94,48 +94,66 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         return db.update(TABLE_FREQUENT, values, "$COLUMN_FREQUENT_ID = ?", arrayOf(id.toString()))
     }
 
-    // Delete a question-answer pair from FrequentQuestions
+    // Delete a question-answer pair from FrequentQuestions.
     fun deleteFrequentQuestion(id: Long): Int {
         val db = this.writableDatabase
         return db.delete(TABLE_FREQUENT, "$COLUMN_FREQUENT_ID = ?", arrayOf(id.toString()))
     }
 
     // FlightDiary CRUD operations.
-    // Insert a new diary entry into FlightDiary
-    fun insertFlightDiaryEntry(origin: String, destination: String, anxietyLevel: Int, description: String): Long {
+    // Insert a new diary entry into FlightDiary.
+    fun insertFlightDiaryEntry(origin: String, destination: String, anxietyLevel: Int, description: String, date: String): Long {
         val db = this.writableDatabase
         val values = ContentValues().apply {
             put(COLUMN_FLIGHT_DIARY_ORIGIN, origin)
             put(COLUMN_FLIGHT_DIARY_DESTINATION, destination)
             put(COLUMN_FLIGHT_DIARY_ANXIETY_LEVEL, anxietyLevel)
             put(COLUMN_FLIGHT_DIARY_DESCRIPTION, description)
+            put(COLUMN_FLIGHT_DIARY_DATE, date)
         }
         return db.insert(TABLE_DIARY, null, values)
     }
 
-    // Get all entries from FlightDiary
+    // Get all entries from FlightDiary.
     fun getAllFlightDiaryEntries(): Cursor {
         val db = this.readableDatabase
         return db.query(TABLE_DIARY, null, null, null, null, null, "$COLUMN_FLIGHT_DIARY_DATE DESC")
     }
 
-    // Update a diary entry in FlightDiary
-    fun updateFlightDiaryEntry(id: Long, origin: String, destination: String, anxietyLevel: Int, description: String): Int {
+    // Update a diary entry in FlightDiary.
+    fun updateFlightDiaryEntry(id: Long, origin: String, destination: String, anxietyLevel: Int, description: String, date: String): Int {
         val db = this.writableDatabase
         val values = ContentValues().apply {
             put(COLUMN_FLIGHT_DIARY_ORIGIN, origin)
             put(COLUMN_FLIGHT_DIARY_DESTINATION, destination)
             put(COLUMN_FLIGHT_DIARY_ANXIETY_LEVEL, anxietyLevel)
             put(COLUMN_FLIGHT_DIARY_DESCRIPTION, description)
+            put(COLUMN_FLIGHT_DIARY_DATE, date)
         }
         return db.update(TABLE_DIARY, values, "$COLUMN_FLIGHT_DIARY_ENTRY_ID = ?", arrayOf(id.toString()))
     }
 
-    // Delete a diary entry from FlightDiary
+    // Delete a diary entry from FlightDiary.
     fun deleteFlightDiaryEntry(id: Long): Int {
         val db = this.writableDatabase
         return db.delete(TABLE_DIARY, "$COLUMN_FLIGHT_DIARY_ENTRY_ID = ?", arrayOf(id.toString()))
     }
+
+    // Get a diary entry by ID.
+    fun getFlightDiaryEntryById(id: Long): Cursor? {
+        val db = this.readableDatabase
+        return db.query(
+            TABLE_DIARY,
+            null,
+            "$COLUMN_FLIGHT_DIARY_ENTRY_ID = ?",
+            arrayOf(id.toString()),
+            null,
+            null,
+            null
+        )
+    }
+
+    // Test
 
     fun testDatabase() {
         // Insert sample data into the FrequentQuestions table
@@ -143,8 +161,8 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         this.insertFrequentQuestion("Why do ears pop during flights?", "This happens due to pressure changes in the cabin.")
 
         // Insert sample data into the FlightDiary table
-        this.insertFlightDiaryEntry("Los Angeles", "New York", 5, "Felt anxious during takeoff but calmed down after reaching altitude.")
-        this.insertFlightDiaryEntry("San Francisco", "Chicago", 3, "Mild anxiety but overall a smooth flight.")
+        this.insertFlightDiaryEntry("Los Angeles", "New York", 5, "Felt anxious during takeoff but calmed down after reaching altitude.", date="2021-09-01")
+        this.insertFlightDiaryEntry("San Francisco", "Chicago", 3, "Mild anxiety but overall a smooth flight.", date="2021-09-30")
 
         // Retrieve and log all entries from the FrequentQuestions table
         val questionsCursor: Cursor = this.getAllFrequentQuestions()
