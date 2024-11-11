@@ -29,11 +29,17 @@ class RelaxationFragment : Fragment() {
         endSound = MediaPlayer.create(context, R.raw.gong_sound)
 
         // Set default time to 5 minutes (SeekBar max should be in minutes)
-        binding.seekBarTime.max = 60 // Example max 60 minutes
+        binding.seekBarTime.max = 30 // Example max 60 minutes
         binding.seekBarTime.progress = 5 // Default 5 minutes
 
         // Set initial button text
         binding.buttonStartStopTimer.text = "Start Timer"
+
+        // Set OnClickListener for the techniques
+        binding.technique1.setOnClickListener { showTechniqueDescription(it) }
+        binding.technique2.setOnClickListener { showTechniqueDescription(it) }
+        binding.technique3.setOnClickListener { showTechniqueDescription(it) }
+        binding.technique4.setOnClickListener { showTechniqueDescription(it) }
 
         binding.seekBarTime.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
@@ -108,6 +114,47 @@ class RelaxationFragment : Fragment() {
         val initialTime = binding.seekBarTime.progress
         binding.textViewTimer.text = String.format("%02d:00 minutes", initialTime)
     }
+
+    fun showTechniqueDescription(view: View) {
+        // Toggle the visibility of the corresponding description
+        when (view.id) {
+            R.id.technique1 -> {
+                if (binding.description1.visibility == View.VISIBLE) {
+                    // If description is already visible, hide it
+                    binding.description1.visibility = View.GONE
+                } else {
+                    // If description is hidden, show it and set text
+                    binding.description1.text = "Deep Breathing: This technique involves inhaling deeply through the nose, holding your breath for a few seconds, and then exhaling slowly. It helps relax the body and reduce stress."
+                    binding.description1.visibility = View.VISIBLE
+                }
+            }
+            R.id.technique2 -> {
+                if (binding.description2.visibility == View.VISIBLE) {
+                    binding.description2.visibility = View.GONE
+                } else {
+                    binding.description2.text = "Progressive Muscle Relaxation: This method involves tensing and then relaxing different muscle groups in the body. It helps release tension and improve relaxation."
+                    binding.description2.visibility = View.VISIBLE
+                }
+            }
+            R.id.technique3 -> {
+                if (binding.description3.visibility == View.VISIBLE) {
+                    binding.description3.visibility = View.GONE
+                } else {
+                    binding.description3.text = "Guided Meditation: A form of meditation where an instructor guides you through relaxing imagery and breathing exercises."
+                    binding.description3.visibility = View.VISIBLE
+                }
+            }
+            R.id.technique4 -> {
+                if (binding.description4.visibility == View.VISIBLE) {
+                    binding.description4.visibility = View.GONE
+                } else {
+                    binding.description4.text = "Mindfulness: A practice that involves focusing on the present moment without judgment. It helps reduce stress and increase awareness."
+                    binding.description4.visibility = View.VISIBLE
+                }
+            }
+        }
+    }
+
 
     override fun onDestroyView() {
         super.onDestroyView()

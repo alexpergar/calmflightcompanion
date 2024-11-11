@@ -3,32 +3,167 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:gravity="center"
     android:padding="16dp">
 
-    <!-- SeekBar to select time in minutes -->
-    <SeekBar
-        android:id="@+id/seekBarTime"
-        android:layout_width="355dp"
+    <!-- Timer Section -->
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:max="60"
-        android:progress="5" />
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_alignParentTop="true">
 
-    <!-- Text view to display the remaining time -->
-    <TextView
-        android:id="@+id/textViewTimer"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="5 min"
-        android:textSize="48sp"
-        android:layout_marginTop="16dp" />
+        <!-- SeekBar to select time in minutes -->
+        <SeekBar
+            android:id="@+id/seekBarTime"
+            android:layout_width="355dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:max="30"
+            android:progress="5" />
 
-    <!-- Button that toggles between Start/Stop -->
-    <Button
-        android:id="@+id/buttonStartStopTimer"
-        android:layout_width="wrap_content"
+        <!-- Text view to display the remaining time -->
+        <TextView
+            android:id="@+id/textViewTimer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="5 min"
+            android:textSize="48sp"
+            android:layout_marginTop="16dp" />
+
+        <!-- Button that toggles between Start/Stop -->
+        <Button
+            android:id="@+id/buttonStartStopTimer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Start Timer"
+            android:layout_marginTop="16dp" />
+    </LinearLayout>
+
+    <!-- ScrollView to contain the list of relaxation techniques -->
+    <ScrollView
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Start Timer"
-        android:layout_marginTop="16dp" />
+        android:layout_marginTop="32dp">
+
+        <!-- Vertical LinearLayout to hold list items -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingTop="16dp">
+
+            <!-- Relaxation Technique 1 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="8dp">
+
+                <TextView
+                    android:id="@+id/technique1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Deep Breathing"
+                    android:textSize="20sp"
+                    android:padding="8dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:background="?android:attr/selectableItemBackground"
+                    android:onClick="showTechniqueDescription" />
+
+                <TextView
+                    android:id="@+id/description1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textSize="16sp"
+                    android:visibility="gone" /> <!-- Initially hidden -->
+            </LinearLayout>
+
+            <!-- Relaxation Technique 2 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="8dp">
+
+                <TextView
+                    android:id="@+id/technique2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Progressive Muscle Relaxation"
+                    android:textSize="20sp"
+                    android:padding="8dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:background="?android:attr/selectableItemBackground"
+                    android:onClick="showTechniqueDescription" />
+
+                <TextView
+                    android:id="@+id/description2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textSize="16sp"
+                    android:visibility="gone" /> <!-- Initially hidden -->
+            </LinearLayout>
+
+            <!-- Relaxation Technique 3 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="8dp">
+
+                <TextView
+                    android:id="@+id/technique3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Guided Meditation"
+                    android:textSize="20sp"
+                    android:padding="8dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:background="?android:attr/selectableItemBackground"
+                    android:onClick="showTechniqueDescription" />
+
+                <TextView
+                    android:id="@+id/description3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textSize="16sp"
+                    android:visibility="gone" /> <!-- Initially hidden -->
+            </LinearLayout>
+
+            <!-- Relaxation Technique 4 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="8dp">
+
+                <TextView
+                    android:id="@+id/technique4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Mindfulness"
+                    android:textSize="20sp"
+                    android:padding="8dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:background="?android:attr/selectableItemBackground"
+                    android:onClick="showTechniqueDescription" />
+
+                <TextView
+                    android:id="@+id/description4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textSize="16sp"
+                    android:visibility="gone" /> <!-- Initially hidden -->
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>
