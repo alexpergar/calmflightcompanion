@@ -32,7 +32,7 @@ class FlightDiaryAdapter(
         holder.dateText.text = entry.date
         holder.originText.text = entry.origin
         holder.destinationText.text = entry.destination
-        holder.anxietyLevelText.text = "Anxiety: ${entry.anxietyLevel}"
+        holder.anxietyLevelText.text = "Ansiedad: ${entry.anxietyLevel}"
 
         holder.itemView.setOnClickListener { onItemClick(entry) }
     }

@@ -44,8 +44,10 @@ class MainActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 
-//        dbHelper.deleteAll()
-//        dbHelper.testDatabase()
+        //dbHelper.deleteAll()
+        if (dbHelper.isDatabaseEmpty()) {
+            dbHelper.initiateDatabase()
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

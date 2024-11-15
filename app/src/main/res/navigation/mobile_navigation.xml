@@ -26,7 +26,7 @@
     <fragment
         android:id="@+id/nav_relaxation"
         android:name="com.example.calmflightcompanion.relaxation.RelaxationFragment"
-        android:label="Relaxation"
+        android:label="Relajación"
         tools:layout="@layout/fragment_relaxation" />
 
     <fragment

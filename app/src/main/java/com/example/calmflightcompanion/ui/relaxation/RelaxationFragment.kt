@@ -124,7 +124,7 @@ class RelaxationFragment : Fragment() {
                     binding.description1.visibility = View.GONE
                 } else {
                     // If description is hidden, show it and set text
-                    binding.description1.text = "Deep Breathing: This technique involves inhaling deeply through the nose, holding your breath for a few seconds, and then exhaling slowly. It helps relax the body and reduce stress."
+                    binding.description1.text = "Inhala profundamente por la nariz contando hasta 4, mantén el aire contando hasta 4 y exhala por la boca contando hasta 4. Repite durante unos minutos."
                     binding.description1.visibility = View.VISIBLE
                 }
             }
@@ -132,7 +132,7 @@ class RelaxationFragment : Fragment() {
                 if (binding.description2.visibility == View.VISIBLE) {
                     binding.description2.visibility = View.GONE
                 } else {
-                    binding.description2.text = "Progressive Muscle Relaxation: This method involves tensing and then relaxing different muscle groups in the body. It helps release tension and improve relaxation."
+                    binding.description2.text = "Inhala durante 4 segundos, mantén el aire durante 7 segundos y exhala durante 8 segundos. Repite durante unos minutos."
                     binding.description2.visibility = View.VISIBLE
                 }
             }
@@ -140,7 +140,7 @@ class RelaxationFragment : Fragment() {
                 if (binding.description3.visibility == View.VISIBLE) {
                     binding.description3.visibility = View.GONE
                 } else {
-                    binding.description3.text = "Guided Meditation: A form of meditation where an instructor guides you through relaxing imagery and breathing exercises."
+                    binding.description3.text = "Comienza por los dedos de los pies y tensa cada grupo muscular (pies, piernas, abdomen, brazos, cara) durante unos 5 segundos, luego relaja completamente. Repite con cada grupo muscular."
                     binding.description3.visibility = View.VISIBLE
                 }
             }
@@ -148,7 +148,7 @@ class RelaxationFragment : Fragment() {
                 if (binding.description4.visibility == View.VISIBLE) {
                     binding.description4.visibility = View.GONE
                 } else {
-                    binding.description4.text = "Mindfulness: A practice that involves focusing on the present moment without judgment. It helps reduce stress and increase awareness."
+                    binding.description4.text = "Cierra los ojos e imagina que estás en un lugar tranquilo (por ejemplo, una playa, un bosque o una montaña). Concéntrate en los detalles del lugar y respira profundamente."
                     binding.description4.visibility = View.VISIBLE
                 }
             }

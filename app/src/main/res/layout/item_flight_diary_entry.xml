@@ -18,7 +18,7 @@
             android:id="@+id/text_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Date"
+            android:text="Fecha"
             android:textColor="#000"
             android:textSize="16sp"
             android:layout_marginBottom="4dp"
@@ -29,7 +29,7 @@
             android:id="@+id/text_origin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Origin"
+            android:text="Origen"
             android:textColor="#666"
             android:textSize="14sp" />
 
@@ -37,7 +37,7 @@
             android:id="@+id/text_destination"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Destination"
+            android:text="Destinación"
             android:textColor="#666"
             android:textSize="14sp" />
 
@@ -46,7 +46,7 @@
             android:id="@+id/text_anxiety_level"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Anxiety Level"
+            android:text="Nivel de ansiedad (1-10)"
             android:textColor="#FF0000"
             android:textSize="14sp"
             android:layout_marginTop="4dp" />

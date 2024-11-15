@@ -36,6 +36,10 @@ class EditEntryFragment : Fragment() {
             saveEntry()
         }
 
+        binding.buttonDeleteEntry.setOnClickListener {
+            deleteEntry()
+        }
+
         return binding.root
     }
 
@@ -60,7 +64,7 @@ class EditEntryFragment : Fragment() {
             binding.editTextAnxietyLevel.setText(anxietyLevel.toString())
             binding.editTextDescription.setText(description)
         } else {
-            Toast.makeText(requireContext(), "Entry not found", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), "No se ha encontrado la entrada", Toast.LENGTH_SHORT).show()
         }
         cursor?.close()
     }
@@ -74,7 +78,7 @@ class EditEntryFragment : Fragment() {
         val description = binding.editTextDescription.text.toString()
 
         if (origin.isEmpty() || destination.isEmpty() || anxietyLevel !in 1..10) {
-            Toast.makeText(requireContext(), "Please fill all fields correctly.", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), "Por favor, rellena todos los campos correctamente", Toast.LENGTH_SHORT).show()
             return
         }
 
@@ -87,11 +91,11 @@ class EditEntryFragment : Fragment() {
         if (entryId != null) {
             // Update existing entry
             dbHelper.updateFlightDiaryEntry(entryId!!.toLong(), origin, destination, anxietyLevel, description, date)
-            Toast.makeText(requireContext(), "Entry updated", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), "Entrada actualizada", Toast.LENGTH_SHORT).show()
         } else {
             // Insert new entry
             dbHelper.insertFlightDiaryEntry(origin, destination, anxietyLevel, description, date)
-            Toast.makeText(requireContext(), "New entry added", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), "Nueva entrada guardada", Toast.LENGTH_SHORT).show()
         }
 
         // Navigate back to the diary list or close the fragment
@@ -101,5 +105,26 @@ class EditEntryFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private fun deleteEntry() {
+        entryId?.let {
+            // Confirm before deleting
+            val dialog = androidx.appcompat.app.AlertDialog.Builder(requireContext())
+                .setTitle("Borrar entrada")
+                .setMessage("¿Estás seguro de borrar esta entrada?")
+                .setPositiveButton("Yes") { _, _ ->
+                    // Perform the deletion
+                    dbHelper.deleteFlightDiaryEntry(it.toLong())
+                    Toast.makeText(requireContext(), "Entrada borrada", Toast.LENGTH_SHORT).show()
+                    // Navigate back
+                    requireActivity().onBackPressed()
+                }
+                .setNegativeButton("No", null)
+                .create()
+            dialog.show()
+        } ?: run {
+            Toast.makeText(requireContext(), "No hay entradas para borrar", Toast.LENGTH_SHORT).show()
+        }
     }
 }
