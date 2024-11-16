@@ -7,16 +7,74 @@
     tools:context=".ui.home.HomeFragment">
 
     <TextView
-        android:id="@+id/text_home"
+        android:id="@+id/text_1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
+        android:text="Cada día, despegan y aterrizan alrededor de 100,000 vuelos comerciales en todo el mundo de forma segura."
+        android:textAlignment="center"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@id/text_2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/text_2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:text="En cualquier momento, hay alrededor de 10,000 vuelos en el aire en cualquier lugar del mundo."
+        android:textAlignment="center"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_1"
+        app:layout_constraintBottom_toTopOf="@id/text_3" />
+
+    <TextView
+        android:id="@+id/text_3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:text="Cada vez que te montas en un avión, hay una probabilidad de 1 en 11 000 000 de morir. Si tomaras un avión cada día de tu vida, tendrían que pasar 303 años para tener una probabilidad de solo el 1% de morir en un accidente aereo."
+        android:textAlignment="center"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_2"
+        app:layout_constraintBottom_toTopOf="@id/text_4" />
+
+    <TextView
+        android:id="@+id/text_4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:text="Volar es aproximadamente 62 veces más seguro que viajar en coche."
         android:textAlignment="center"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/text_3"
+        app:layout_constraintBottom_toTopOf="@+id/text_5" />
+
+    <TextView
+        android:id="@+id/text_5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:text="En 2023, más de 4.7 mil millones de personas volaron en aviones comerciales sin ningún incidente grave."
+        android:textAlignment="center"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_4" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -53,11 +53,11 @@ class EditEntryFragment : Fragment() {
             val anxietyLevel = cursor.getInt(cursor.getColumnIndexOrThrow(DatabaseHelper.COLUMN_FLIGHT_DIARY_ANXIETY_LEVEL))
             val description = cursor.getString(cursor.getColumnIndexOrThrow(DatabaseHelper.COLUMN_FLIGHT_DIARY_DESCRIPTION))
 
-            // Parse and format the date
+            // Parse and format the date.
             val inputFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
             val date = inputFormat.parse(dateTime)?.let { inputFormat.format(it) } ?: dateTime
 
-            // Populate fields with existing data
+            // Populate fields with existing data.
             binding.editTextDate.setText(date)
             binding.editTextOrigin.setText(origin)
             binding.editTextDestination.setText(destination)
@@ -70,7 +70,7 @@ class EditEntryFragment : Fragment() {
     }
 
     private fun saveEntry() {
-        // Retrieve data from input fields
+        // Retrieve data from input fields.
         val dateInput = binding.editTextDate.text.toString()
         val origin = binding.editTextOrigin.text.toString()
         val destination = binding.editTextDestination.text.toString()
@@ -82,23 +82,23 @@ class EditEntryFragment : Fragment() {
             return
         }
 
-        // Parse and format the date
+        // Parse and format the date.
         val inputFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
         val outputFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
         val date = inputFormat.parse(dateInput)?.let { outputFormat.format(it) } ?: dateInput
 
-        // Check if we're updating an existing entry or creating a new one
+        // Check if we're updating an existing entry or creating a new one.
         if (entryId != null) {
             // Update existing entry
             dbHelper.updateFlightDiaryEntry(entryId!!.toLong(), origin, destination, anxietyLevel, description, date)
             Toast.makeText(requireContext(), "Entrada actualizada", Toast.LENGTH_SHORT).show()
         } else {
-            // Insert new entry
+            // Insert new entry.
             dbHelper.insertFlightDiaryEntry(origin, destination, anxietyLevel, description, date)
             Toast.makeText(requireContext(), "Nueva entrada guardada", Toast.LENGTH_SHORT).show()
         }
 
-        // Navigate back to the diary list or close the fragment
+        // Navigate back to the diary list or close the fragment.
         requireActivity().onBackPressed()
     }
 
@@ -109,15 +109,15 @@ class EditEntryFragment : Fragment() {
 
     private fun deleteEntry() {
         entryId?.let {
-            // Confirm before deleting
+            // Confirm before deleting.
             val dialog = androidx.appcompat.app.AlertDialog.Builder(requireContext())
                 .setTitle("Borrar entrada")
                 .setMessage("¿Estás seguro de borrar esta entrada?")
                 .setPositiveButton("Yes") { _, _ ->
-                    // Perform the deletion
+                    // Perform the deletion.
                     dbHelper.deleteFlightDiaryEntry(it.toLong())
                     Toast.makeText(requireContext(), "Entrada borrada", Toast.LENGTH_SHORT).show()
-                    // Navigate back
+                    // Navigate back.
                     requireActivity().onBackPressed()
                 }
                 .setNegativeButton("No", null)
